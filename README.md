@@ -17,6 +17,8 @@ This resource was created as a free ESX script for backpacks using ox_inventory
 - Put script in your `resources` directory
 - Ensure script AFTER `ox_lib` but BEFORE `ox_inventory`
 
+**Important: Must start before resources that start ox_inventory automatically(For example; ox_fuel, ox_doorlock)**
+
 # Dependencies
  - ox_inventory
  - es_extended
