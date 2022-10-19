@@ -42,6 +42,8 @@ How item should be inserted into shop(Put in a shop found in `ox_inventory/data/
 { name = "backpack", price = 50, metadata = {identifier = exports.wasabi_backpack:GenerateSerial()} },
 ```
 
+**Tip:** *Backpack must be purchased from store to function properly currently. Will be improving so this will not be a requirement soon!*
+
 ## Preview
 https://www.youtube.com/watch?v=OsjuUtE9Pg8
 
