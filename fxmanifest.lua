@@ -20,3 +20,8 @@ shared_scripts {
   '@ox_lib/init.lua',
   'config.lua'
 }
+
+dependencies {
+  'es_extended',
+  'ox_inventory'
+}
