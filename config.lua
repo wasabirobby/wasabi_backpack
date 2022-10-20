@@ -3,7 +3,9 @@
 ---------------------------------------------------------------
 Config = {}
 
-Config.BackpackItem = 'backpack'
+Config.checkForUpdates = true -- Check for updates?
+
+Config.BackpackItem = 'backpack' -- Item name of backpack
 
 Config.BackpackStorage = {
     slots = 8, -- Slots of backpack storage
