@@ -15,8 +15,6 @@ This resource was created as a free ESX script for backpacks using ox_inventory
 - Add backpack image to inventory images (found in `wasabi_backpack/_inventory_images/backpack.png`)
 - Put script in your `resources` directory
 
-**Important: Must start before resources that start ox_inventory automatically(For example; ox_fuel, ox_doorlock)**
-
 # Dependencies
  - ox_inventory
  - es_extended
