@@ -12,10 +12,8 @@ This resource was created as a free ESX script for backpacks using ox_inventory
 
 - Download this script
 - Add backpack to inventory as it is in "Extra Information" below
-- Add backpack to a shop with format as shown in "Extra Information" below
 - Add backpack image to inventory images (found in `wasabi_backpack/_inventory_images/backpack.png`)
 - Put script in your `resources` directory
-- Ensure script AFTER `ox_lib` but BEFORE `ox_inventory`
 
 **Important: Must start before resources that start ox_inventory automatically(For example; ox_fuel, ox_doorlock)**
 
@@ -36,13 +34,6 @@ Item to add to `ox_inventory/data/items.lua`
 		}
 	},
 ```
-
-How item should be inserted into shop(Put in a shop found in `ox_inventory/data/shops.lua`):
-```
-{ name = "backpack", price = 50, metadata = {identifier = exports.wasabi_backpack:GenerateSerial()} },
-```
-
-**Tip:** *Backpack must be purchased from store to function properly currently. Will be improving so this will not be a requirement soon!*
 
 ## Preview
 https://www.youtube.com/watch?v=OsjuUtE9Pg8
