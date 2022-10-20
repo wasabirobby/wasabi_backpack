@@ -14,26 +14,6 @@ AddEventHandler('esx:playerLoaded', function(xPlayer)
     startBagCheck()
 end)
 
-function GenerateText(num) -- Thnx Linden
-	local str
-	repeat str = {}
-		for i = 1, num do str[i] = string.char(math.random(65, 90)) end
-		str = table.concat(str)
-	until str ~= 'POL' and str ~= 'EMS'
-	return str
-end
-
-exports('GenerateText', GenerateText)
-
-function GenerateSerial(text) -- Thnx Again
-	if text and text:len() > 3 then
-		return text
-	end
-	return ('%s%s%s'):format(math.random(100000,999999), text == nil and GenerateText(3) or text, math.random(100000,999999))
-end
-
-exports('GenerateSerial', GenerateSerial)
-
 startBagCheck = function()
     CreateThread(function()
         while true do
@@ -58,6 +38,11 @@ startBagCheck = function()
 end
 
 exports('openBackpack', function(data, slot)
-    TriggerServerEvent('wasabi_backpack:openBackpack', slot.metadata.identifier)
-    exports.ox_inventory:openInventory('stash', 'bag_'..slot.metadata.identifier)
+    if not slot?.metadata?.identifier then
+        local identifier = lib.callback.await('wasabi_backpack:getNewIdentifier', 100, data.slot)
+        exports.ox_inventory:openInventory('stash', 'bag_'..identifier)
+    else
+        TriggerServerEvent('wasabi_backpack:openBackpack', slot.metadata.identifier)
+        exports.ox_inventory:openInventory('stash', 'bag_'..slot.metadata.identifier)
+    end
 end)
