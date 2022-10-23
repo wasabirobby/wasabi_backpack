@@ -2,6 +2,8 @@
 --------------- https://discord.gg/wasabiscripts  -------------
 ---------------------------------------------------------------
 local registeredStashes = {}
+local ox_inventory = exports.ox_inventory
+
 
 local function GenerateText(num) -- Thnx Linden
 	local str
@@ -22,15 +24,15 @@ end
 RegisterServerEvent('wasabi_backpack:openBackpack')
 AddEventHandler('wasabi_backpack:openBackpack', function(identifier)
 	if not registeredStashes[identifier] then
-        exports.ox_inventory:RegisterStash('bag_'..identifier, 'Backpack', Config.BackpackStorage.slots, Config.BackpackStorage.weight, false)
+        ox_inventory:RegisterStash('bag_'..identifier, 'Backpack', Config.BackpackStorage.slots, Config.BackpackStorage.weight, false)
         registeredStashes[identifier] = true
     end
 end)
 
 lib.callback.register('wasabi_backpack:getNewIdentifier', function(source, slot)
 	local newId = GenerateSerial()
-	exports.ox_inventory:SetMetadata(source, slot, {identifier = newId})
-	exports.ox_inventory:RegisterStash('bag_'..newId, 'Backpack', Config.BackpackStorage.slots, Config.BackpackStorage.weight, false)
+	ox_inventory:SetMetadata(source, slot, {identifier = newId})
+	ox_inventory:RegisterStash('bag_'..newId, 'Backpack', Config.BackpackStorage.slots, Config.BackpackStorage.weight, false)
 	registeredStashes[newId] = true
 	return newId
 end)
