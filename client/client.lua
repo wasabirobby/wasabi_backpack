@@ -6,6 +6,7 @@ local bagEquipped, bagObj
 local hash = `p_michael_backpack_s`
 local ox_inventory = exports.ox_inventory
 local ped = cache.ped
+local justConnect = true
 
 
 
@@ -27,6 +28,10 @@ local function RemoveBag()
 end
 
 AddEventHandler('ox_inventory:updateInventory', function(changes)
+    if justConnect then
+        Wait(4500)
+        justConnect = nil
+    end
     for k, v in pairs(changes) do
         if type(v) == 'table' then
             local count = ox_inventory:Search('count', Config.BackpackItem)
@@ -45,7 +50,11 @@ AddEventHandler('ox_inventory:updateInventory', function(changes)
     end
 end)
 
-lib.onCache('vehicle', function(value)
+lib.onCache('ped', function(value)
+    ped = value
+end)
+
+--[[lib.onCache('vehicle', function(value)
     if value then
         RemoveBag()
     else
@@ -54,11 +63,7 @@ lib.onCache('vehicle', function(value)
             PutOnBag()
         end
     end
-end)
-
-lib.onCache('ped', function(value)
-    ped = value
-end)
+end)]]-- Needs work for player load error?
 
 exports('openBackpack', function(data, slot)
     if not slot?.metadata?.identifier then
