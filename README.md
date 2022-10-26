@@ -14,6 +14,7 @@ This resource was created as a free script for backpacks using ox_inventory
 - Add backpack to inventory as it is in "Extra Information" below
 - Add backpack image to inventory images (found in `wasabi_backpack/_inventory_images/backpack.png`)
 - Put script in your `resources` directory
+- ensure `wasabi_backpack` *after* `ox_lib` but *before* `ox_inventory`
 
 # Dependencies
  - ox_inventory
