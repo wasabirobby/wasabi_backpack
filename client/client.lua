@@ -7,7 +7,7 @@ local hash = `p_michael_backpack_s`
 local ox_inventory = exports.ox_inventory
 local ped = cache.ped
 local justConnect = true
-
+local playerLoaded = false
 
 
 local function PutOnBag()
@@ -21,6 +21,7 @@ end
 local function RemoveBag()
     if DoesEntityExist(bagObj) then
         DeleteObject(bagObj)
+        DeleteEntity(bagObj)
     end
     SetModelAsNoLongerNeeded(hash)
     bagObj = nil
@@ -32,12 +33,13 @@ AddEventHandler('ox_inventory:updateInventory', function(changes)
         Wait(4500)
         justConnect = nil
     end
+    playerLoaded = true
     for k, v in pairs(changes) do
         if type(v) == 'table' then
             local count = ox_inventory:Search('count', Config.BackpackItem)
 	        if count > 0 and (not bagEquipped or not bagObj) then
                 PutOnBag()
-            elseif count < 1 and bagEquipped then
+            elseif count < 1 then
                 RemoveBag()
             end
         end
@@ -50,20 +52,23 @@ AddEventHandler('ox_inventory:updateInventory', function(changes)
     end
 end)
 
-lib.onCache('ped', function(value)
-    ped = value
-end)
 
---[[lib.onCache('vehicle', function(value)
+lib.onCache('vehicle', function(value)
     if value then
         RemoveBag()
     else
+        if GetResourceState('ox_inventory') ~= 'started' or not playerLoaded then return end
         local count = ox_inventory:Search('count', Config.BackpackItem)
         if count and count >= 1 then
             PutOnBag()
         end
     end
-end)]]-- Needs work for player load error?
+end) 
+
+lib.onCache('ped', function(value)
+    ped = value
+end)
+
 
 exports('openBackpack', function(data, slot)
     if not slot?.metadata?.identifier then
