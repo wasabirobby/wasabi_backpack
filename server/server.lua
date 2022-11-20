@@ -27,6 +27,18 @@ AddEventHandler('wasabi_backpack:openBackpack', function(identifier)
         ox_inventory:RegisterStash('bag_'..identifier, 'Backpack', Config.BackpackStorage.slots, Config.BackpackStorage.weight, false)
         registeredStashes[identifier] = true
     end
+	local hookId = exports.ox_inventory:registerHook('swapItems', function(payload)
+	print(json.encode(payload, { indent = true }))
+	return false
+	end, {
+		print = true,
+		itemFilter = {
+			backpack = true,
+		},
+		inventoryFilter = {
+			'bag_'..identifier,
+		}
+	})
 end)
 
 lib.callback.register('wasabi_backpack:getNewIdentifier', function(source, slot)
@@ -36,3 +48,4 @@ lib.callback.register('wasabi_backpack:getNewIdentifier', function(source, slot)
 	registeredStashes[newId] = true
 	return newId
 end)
+
