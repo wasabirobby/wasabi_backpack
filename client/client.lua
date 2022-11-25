@@ -8,8 +8,6 @@ local ox_inventory = exports.ox_inventory
 local ped = cache.ped
 local justConnect = true
 
-
-
 local function PutOnBag()
     local x, y, z = table.unpack(GetOffsetFromEntityInWorldCoords(ped,0.0,3.0,0.5))
     lib.requestModel(hash, 100)
