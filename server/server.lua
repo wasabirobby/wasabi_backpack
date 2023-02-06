@@ -1,9 +1,9 @@
 -----------------For support, scripts, and more----------------
 --------------- https://discord.gg/wasabiscripts  -------------
 ---------------------------------------------------------------
+
 local registeredStashes = {}
 local ox_inventory = exports.ox_inventory
-
 
 local function GenerateText(num) -- Thnx Linden
 	local str
@@ -21,8 +21,7 @@ local function GenerateSerial(text) -- Thnx Again
 	return ('%s%s%s'):format(math.random(100000,999999), text == nil and GenerateText(3) or text, math.random(100000,999999))
 end
 
-RegisterServerEvent('wasabi_backpack:openBackpack')
-AddEventHandler('wasabi_backpack:openBackpack', function(identifier)
+RegisterNetEvent('wasabi_backpack:openBackpack', function(identifier)
 	if not registeredStashes[identifier] then
         ox_inventory:RegisterStash('bag_'..identifier, 'Backpack', Config.BackpackStorage.slots, Config.BackpackStorage.weight, false)
         registeredStashes[identifier] = true

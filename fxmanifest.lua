@@ -1,7 +1,9 @@
 -----------------For support, scripts, and more----------------
 --------------- https://discord.gg/wasabiscripts  -------------
 ---------------------------------------------------------------
+
 fx_version 'cerulean'
+use_experimental_fxv2_oal 'yes'
 game 'gta5'
 lua54 'yes'
 
@@ -9,7 +11,7 @@ description 'Wasabi Backpack for Ox Inventory'
 version '1.0.4'
 
 client_scripts {
-    'client/**.lua'
+  'client/**.lua'
 }
 
 server_scripts {
