@@ -34,7 +34,7 @@ AddEventHandler('ox_inventory:updateInventory', function(changes)
     end
     for k, v in pairs(changes) do
         if type(v) == 'table' then
-            local count = ox_inventory:Search('count', Config.BackpackItem)
+            local count = ox_inventory:Search('count', 'backpack')
 	        if count > 0 and (not bagEquipped or not bagObj) then
                 PutOnBag()
             elseif count < 1 and bagEquipped then
@@ -42,7 +42,7 @@ AddEventHandler('ox_inventory:updateInventory', function(changes)
             end
         end
         if type(v) == 'boolean' then
-            local count = ox_inventory:Search('count', Config.BackpackItem)
+            local count = ox_inventory:Search('count', 'backpack')
             if count < 1 and bagEquipped then
                 RemoveBag()
             end
@@ -54,16 +54,17 @@ lib.onCache('ped', function(value)
     ped = value
 end)
 
---[[lib.onCache('vehicle', function(value)
+lib.onCache('vehicle', function(value)
+    if GetResourceState('ox_inventory') ~= 'started' then return end
     if value then
         RemoveBag()
     else
-        local count = ox_inventory:Search('count', Config.BackpackItem)
+        local count = ox_inventory:Search('count', 'backpack')
         if count and count >= 1 then
             PutOnBag()
         end
     end
-end)]]-- Needs work for player load error?
+end)
 
 exports('openBackpack', function(data, slot)
     if not slot?.metadata?.identifier then
@@ -74,4 +75,3 @@ exports('openBackpack', function(data, slot)
         ox_inventory:openInventory('stash', 'bag_'..slot.metadata.identifier)
     end
 end)
-
